@@ -1,0 +1,86 @@
+<div class="c-form__container">
+
+  <div class="c-form__column js-window-form" data-form="{{ module.form.form.form_id }}">
+    <h3>Using HubL</h3>
+    <p>Status: <span class="js-window-form-status"></span></p>
+
+    {% form "form"
+      form_to_use='{{ module.form.form.form_id }}',
+      follow_up_type_simple='{{ module.form.follow_up_type_simple }}',
+      simple_email_for_live_id='{{ module.form.simple_email_for_live_id }}',
+      response_response_type='{{ module.form.form.response_type }}',
+      response_redirect_id='{{ module.form.form.redirect_id }}',
+      response_redirect_url='{{ module.form.form.redirect_url }}',
+      response_message='{{ module.form.form.message }}'
+    %}
+
+    <ul class="c-form__list">
+      <li>Firstname: <span class="js-window-form-name"></span></li>
+      <li>Email: <span class="js-window-form-email"></span></li>
+    </ul>
+  </div>
+
+  <div class="c-form__column js-window-form" data-form="ac5ed14f-95e8-4414-8084-7aed12eef1cf">
+    <h3>Form embed code</h3>
+    <p>Status: <span class="js-window-form-status"></span></p>
+
+    <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js?pre=1"></script>
+    <script>
+      hbspt.forms.create({
+        region: "na1",
+        portalId: "22606662",
+        formId: "ac5ed14f-95e8-4414-8084-7aed12eef1cf"
+      });
+    </script>
+
+    <ul class="c-form__list">
+      <li>Firstname: <span class="js-window-form-name"></span></li>
+      <li>Email: <span class="js-window-form-email"></span></li>
+    </ul>
+  </div>
+
+  <div class="c-form__column js-customizing-form">
+    <h3>Customizing</h3>
+    <p>Status: <span class="js-custom-form-status"></span></p>
+    <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js?pre=1"></script>
+    <script>
+      hbspt.forms.create({
+        region: "na1",
+        portalId: "22606662",
+        formId: "75c04c2a-1f7b-40b5-af57-96c3bfab953e",
+        locale: 'nl',
+        translations: {
+          nl: {
+            required: "Hey! Dat is een verplicht veld!",
+            submitText: "Verzend!",
+            submissionErrors: {
+              MISSING_REQUIRED_FIELDS: "Vul alle verplichte velden in!"
+            },
+          }
+        },
+        onBeforeFormInit: ($form) => {
+          document.querySelector('.js-custom-form-status').innerHTML = 'Before initializing'
+        },
+        onFormReady: ($form) => {
+          document.querySelector('.js-custom-form-status').innerHTML = 'Form ready'
+        },
+        onFormSubmit: ($form) => {
+          const container = document.querySelector('.js-customizing-form')
+          container.querySelector('.js-custom-form-status').innerHTML = 'Form submitting'
+          container.querySelector('.js-custom-form-name').innerHTML = container.querySelector('input[name="firstname"]').value
+          container.querySelector('.js-custom-form-email').innerHTML = container.querySelector('input[name="email"]').value
+        },
+        onFormSubmitted: ($form) => {
+          const container = document.querySelector('.js-customizing-form')
+          container.querySelector('.js-custom-form-status').innerHTML = 'Form submitted'
+          container.querySelector('.c-form__list').classList.add('active')
+        }
+      });
+    </script>
+
+    <ul class="c-form__list">
+      <li>Firstname: <span class="js-custom-form-name"></span></li>
+      <li>Email: <span class="js-custom-form-email"></span></li>
+    </ul>
+  </div>
+</div>
